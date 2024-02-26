@@ -21,9 +21,4 @@ UtilityButton.propTypes = {
     utility: PropTypes.string,
 };
 
-UtilityButton.defaultProps = {
-    hoverColor: '',
-    variant: 'ghost', // Default variant if not provided
-};
-
 export default UtilityButton;

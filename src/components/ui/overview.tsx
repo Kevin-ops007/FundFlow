@@ -19,9 +19,6 @@ const renderActiveShape = (props: any) => {
 
     return (
         <g>
-            <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-                {payload.name}
-            </text>
             <Sector
                 cx={cx}
                 cy={cy}
@@ -42,10 +39,7 @@ const renderActiveShape = (props: any) => {
             />
             <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
             <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-            <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
-            <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-                {`(Rate ${(percent * 100).toFixed(2)}%)`}
-            </text>
+            <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${payload.name}`}</text>
         </g>
     );
 };
@@ -69,27 +63,32 @@ export default function Overview() {
         setActiveIndex(index);
     };
 
-    const data02 = [{ name: "Group B", value: 300 }, { name: "Group c", value: 300 }]
+    const data02 = [{ name: "Savings and Investments", value: 30000 }, { name: "Expenses", value: 10000 }]
     return (
         <>
-            <Card className="col-span-2">
+            <Card className="col-span-2 lg:col-span-1">
                 <CardHeader>
                     <CardTitle>Overview</CardTitle>
                 </CardHeader>
                 <CardContent className="pl-2">
                     <ResponsiveContainer width="100%" height={500}>
-                        <Pie
-
-                            data={data02}
-                            dataKey="value"
-                            nameKey="name"
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={100}
-                            fill="#82ca9d"
-                            paddingAngle={5}
-                            labelLine={false}
-                        />
+                        <PieChart width={400} height={400}>
+                            <Pie
+                                activeIndex={activeIndex}
+                                activeShape={renderActiveShape}
+                                data={data02}
+                                dataKey="value"
+                                nameKey="name"
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={100}
+                                fill="#82ca9d"
+                                paddingAngle={5}
+                                labelLine={false}
+                                label={renderCustomizedLabel}
+                                onMouseEnter={onPieEnter}
+                            />
+                        </PieChart>
                     </ResponsiveContainer>
                 </CardContent>
             </Card>

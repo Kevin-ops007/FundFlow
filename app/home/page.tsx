@@ -23,7 +23,7 @@ export default function CardWithForm() {
                     <Highlights title="Income" value="40,231.89" gain="45.1" />
                     <Highlights title="Total Savings" value="700,231.89" gain="25.1" />
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
                     <Overview />
                 </div>
             </div>
